@@ -1,0 +1,51 @@
+
+/* F2D6E9  ROSA MAS CLARO
+    DDC0DC Violeta
+    AD9ACA MORADO
+    9EA6D3 AZUL MORADO
+    B1DEF1 AZUL CLARO
+*/
+
+.app-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+
+.left-container {
+  flex: 1;
+  padding: 10px;
+  background-color: #f2d6e9;
+}
+
+.search-container {
+  display: flex;
+  flex-direction: row; 
+  gap: 10px;  
+}
+
+.right-container {
+  flex: 1;
+  padding: 10px;
+  background-color: #ddc0dc;
+}
+
+.selected-products-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.right-bottom-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.left-side {
+  flex: 1;
+} 
+
+.right-side {
+  flex: 1;
+}
