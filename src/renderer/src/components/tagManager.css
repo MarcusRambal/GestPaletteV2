@@ -1,14 +1,13 @@
-.filter-container select {
-    background-color: white;
+.label-container button {
+    background-color: #B1DEF1;
     border-radius: 10px;
     cursor: pointer;
     padding : 15px 20px;
     border:none;
     font-size: 16px;
     min-height: 45px;
-    
 }
 
-.filter-container select:hover {
-    background-color: #e7ecf7;
+.label-container button:hover {
+    background-color: #82ccec;
 }

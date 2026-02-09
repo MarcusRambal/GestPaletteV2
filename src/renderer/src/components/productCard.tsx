@@ -1,13 +1,24 @@
+import './productCard.css';
 
+interface ProductProps {
+  nombre: string;
+  tipo: string;
+  precio: number;
+  color: string;
+}
 
+export const ProductCard: React.FC<ProductProps> = ({ nombre, tipo, precio, color }) => {
+  return (
+    <div className="product-card" style={{ backgroundColor: color }}>
+      <div className="product-info">
+        <p className="product-description">{nombre}</p>
+        <span className="product-category">{tipo}</span>
+      </div>
 
-export const ProductCard = () => {
-
-    return (
-        <div className="product-card">
-            <h2>Product Name</h2>
-            <p>Price: $0.00</p>
-            <button>Add to Cart</button>        
-        </div>
-    )
-}   
+      <div className="actions">
+        <button className="add-button-red">+</button>
+        <div className="price-tag">${precio}</div>
+      </div>
+    </div>
+  );
+};

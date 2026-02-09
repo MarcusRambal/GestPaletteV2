@@ -1,0 +1,64 @@
+/* Este es el molde que nunca cambia */
+.product-card {
+  display: flex;
+  align-items: stretch; 
+  min-height: 80px;    
+  border-radius: 10px;
+  overflow: hidden;   
+  transition: transform 0.2s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-2px);
+}
+
+.product-info {
+  flex: 1;
+  padding: 12px 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.product-description {
+  margin: 0;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #2d2d2d;
+}
+
+.product-category {
+  font-size: 0.85rem;
+  color: #616161;
+  margin-top: 4px;
+}
+
+
+.actions {
+  display: flex;
+  background-color: #000;
+  margin: 6px; 
+  border-radius: 12px;
+}
+
+.add-button-red {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 0 15px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  border-radius: 10px 0 0 10px;   
+}
+
+.add-button-red:hover {
+  background-color: #e41414;
+}
+
+.price-tag {
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+  font-weight: bold;
+}
