@@ -1,0 +1,28 @@
+.payment-type-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}   
+
+.payment-type-container input {
+    padding: 15px 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    min-height: 45px;
+}
+
+.payment-select select {
+    background-color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    padding : 15px 20px;
+    border:none;
+    font-size: 16px;
+    min-height: 45px;
+    
+}
+
+.payment-select select:hover {
+    background-color: #e7ecf7;
+}

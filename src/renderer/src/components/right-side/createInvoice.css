@@ -1,0 +1,14 @@
+.create-invoice-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.create-invoice-container button {
+  background-color: #32e043;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 15px 20px;
+  border: none;
+  font-size: 18px;
+}

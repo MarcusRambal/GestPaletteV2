@@ -5,7 +5,7 @@
 
     return (
         <div className="filter-container">
-           <select name="filters">
+           <select name="filters" id="filters">
                 <option value="opcion0">Filtrar por</option>
                 <option value="opcion1">Hatsune Miku</option>
                 <option value="opcion2">Kagamine Rin</option>

@@ -1,0 +1,35 @@
+.cashback-calculator-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 15px 20px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.input-group label {
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.input-group input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.calculate-button {
+    background-color: #9EA6D3;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 10px 15px;
+    border: none;
+    font-size: 18px;
+}

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import ModalLayout   from './layouts/modalLayout';
+import ModalLayout   from '../layouts/modalLayout';
 import TagForm  from './tagForm';
 import './tagManager.css';
 

@@ -1,0 +1,80 @@
+.selected-product-grid {
+  display: grid;
+  /* Columnas: Info(flexible), Cantidad(pequeña), Precio(medio), Total(medio), Botón(fijo) */
+  grid-template-columns: 2fr 80px 80px 80px auto;
+  align-items: center;
+  gap: 15px;
+  padding: 10px 10px;
+}
+
+
+.selected-quantity {
+  font-weight: bold;
+  background: rgba(255, 255, 255, 0.5);
+  padding: 4px 8px;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.selected-unit-price {
+  font-size: 0.9rem;
+  color: #444;
+  text-align: right;
+}
+
+.selected-total {
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: #000;
+  text-align: right;
+}
+
+/* Estilo para el encabezado de la tabla */
+.selection-header {
+  display: grid;
+  grid-template-columns: 2fr 80px 100px 100px auto;
+  gap: 15px;
+  padding: 10px 15px;
+  font-weight: bold;
+  color: #666;
+  border-bottom: 2px solid #eee;
+}
+
+.selected-product-info h2 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.selected-product-info p {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.selected-price {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #1a1a1a;
+  min-width: 80px;
+  text-align: right;
+}
+
+.remove-button-red {
+  background-color: #ff4d4f;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.85rem;
+  transition: background 0.2s;
+}
+
+.remove-button-red:hover {
+  background-color: #d9363e;
+}
