@@ -17,9 +17,6 @@ interface ProductManagerProps {
 export const ProductManager: React.FC<ProductManagerProps> = ({ tags, onProductCreated }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleOpenModal = () => setIsModalOpen(true);
-  const handleCloseModal = () => setIsModalOpen(false);
-
   const handleSaveProduct = (productData: any) => {
     // Aquí podrías generar un ID único o tratar los datos antes de enviarlos
     const newProduct = {
@@ -28,26 +25,25 @@ export const ProductManager: React.FC<ProductManagerProps> = ({ tags, onProductC
     };
     
     onProductCreated(newProduct);
-    handleCloseModal(); // Cierra el modal tras crear
+   setIsModalOpen(false) 
   };
 
   return (
     <div className="product-manager-header">
       {/* Botón que dispara el modal */}
-      <button className="open-modal-btn" onClick={handleOpenModal}>
+      <button className="open-modal-btn" onClick={setIsModalOpen(true)}>
         Nuevo Producto
       </button>
 
       {/* Modal que renderiza el formulario de productos */}
       <ModalLayout 
         isOpen={isModalOpen} 
-        onClose={handleCloseModal} 
+        onClose={() => setIsModalOpen(false) }
         title="Crear Nuevo Producto"
       >
         <ProductForm 
           tags={tags} 
           onSubmit={handleSaveProduct} 
-          onCancel={handleCloseModal} 
         />
       </ModalLayout>
     </div>
