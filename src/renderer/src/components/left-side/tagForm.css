@@ -5,9 +5,20 @@
   flex-direction: column;
 }
 
+.tag-form p {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.tag-form-inpur-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
 
 .tag-input {
-  margin-top: 20px;
   padding: 8px;
   margin-right: 10px;
   border: 1px solid #ccc;

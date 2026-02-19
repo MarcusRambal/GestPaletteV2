@@ -41,6 +41,16 @@
   background-color: #AD9ACA;
 }
 
+.products-header-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 90%;
+}
+
+
+
 .products-container {
   display: flex;
   flex-direction: column;

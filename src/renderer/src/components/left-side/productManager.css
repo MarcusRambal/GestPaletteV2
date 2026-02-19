@@ -1,0 +1,11 @@
+
+
+.product-manager-header button {
+    padding: 10px 20px;
+    background-color: #6f45ae;
+    color:white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+

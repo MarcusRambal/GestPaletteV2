@@ -1,11 +1,14 @@
 import React from 'react'
 import './App.css'
+import { useState } from 'react';
+import { ProductProps } from './types/productProps';
 
 //left side imports 
 import { SearchBar } from './components/left-side/searchBar'
 import { Filter } from './components/left-side/filter'
 import  TagManager   from './components/left-side/tagManager'
 import { ProductCard } from './components/left-side/productCard'
+import { ProductManager } from './components/left-side/productManager'
 
 //right side imports 
 import { SelectedProduct } from './components/right-side/selectedProduct'
@@ -21,6 +24,7 @@ function App(): React.JSX.Element {
     alert(resultado)
   }
  */ 
+const [selectedProducts, setSelectedProducts] = useState<ProductProps[]>([]);
 const productos = [
   { id: 1, name: "Fresas, crema chantilly salsa de mora, leche. condensadas y M&M", type: "Rellenas", price: 6000, color: "#e5b3e1" },
   { id: 2, name: "Choco-Menta", type: "Especial", price: 7500, color: "#b3e5d1" },
@@ -34,6 +38,27 @@ const productos = [
   { id: 10, name: "Caramelo Salado", type: "Rellenas", price: 8000, color: "#f5c6cb" }
 ];
 
+const handleAddProduct = (product: any) => {
+    setSelectedProducts(prevList => {
+      const exists = prevList.find(item => item.id === product.id);
+      if (exists) {
+        return prevList.map(item =>
+          item.id === product.id ? { ...item, quantity: (item.quantity ?? 0) + 1 } : item
+        );
+      }
+      return [...prevList, { ...product, quantity: 1 }];
+    });
+  };
+
+  const handleRemoveProduct = (id: number) => {
+    setSelectedProducts(prevList => {
+      return prevList.map(item => 
+        item.id === id 
+          ? { ...item, quantity: (item.quantity ?? 1) - 1 }
+          : item
+      ).filter(item => (item.quantity ?? 0) > 0);
+    });
+  };
  
   return (
     <>
@@ -46,16 +71,26 @@ const productos = [
         </div>      {/* search-container */}
         
         <div className='products-container'>
-          <h1>Lista de Productos</h1>
+          <div className='products-header-container'>
+            <h1>Lista de Productos</h1>
+            {/* tags para ProductManager y handler para recibir el producto creado */}
+            {/** Si prefieres traer `tags` desde un store o API, reemplaza esta constante */}
+            <ProductManager
+              tags={[
+                { id: '1', name: 'Rellenas', color: '#e5b3e1' },
+                { id: '2', name: 'Especial', color: '#b3e5d1' },
+                { id: '3', name: 'Clásica', color: '#fdfd96' }
+              ]}
+              onProductCreated={(newProduct) => { console.log('Producto creado:', newProduct); }}
+            />
+          </div>
           <div className = 'product-list'>
             {productos.map((prod) => (
               <ProductCard 
-                key={prod.id} 
-                name={prod.name}
-                type={prod.type}
-                price={prod.price}
-                color={prod.color}
-              />
+                key={prod.id}
+                {...prod}
+                onAdd={() => handleAddProduct(prod)}
+                />
           ))}
           </div>
               
@@ -68,22 +103,20 @@ const productos = [
        
           <h1>Productos Seleccionados</h1>
            <div className='selected-products-container'>
-            {productos.map((prod) => (
+            {selectedProducts.map((prod) => (
               <SelectedProduct 
-                key={prod.id} 
-                name={prod.name}
-                type={prod.type}
-                price={prod.price}
-                color={prod.color}
-                quantity={2}
+                key={prod.id}
+                {...prod}
+                quantity={prod.quantity ?? 1}
+                onRemove={() => handleRemoveProduct(prod.id)}
               />
-          ))}
+            ))}
             {/* Aquí van los productos seleccionados */}
         </div> {/* selected-products-container */}
         <div className='right-bottom-container'>
             <div className='left-side'>
               <div className='left-side-container'>
-                <PaymentType />
+                <PaymentType /> 
                 <h2>Total: $1110.0</h2>
                 <CreateInvoice />
               </div>

@@ -24,7 +24,7 @@ const TagManager = () => {
       <ModalLayout 
         isOpen={isModalOpen} 
         onClose={() => setIsModalOpen(false)} 
-        title="Configurar Etiqueta"
+        title="Crear nueva Etiqueta"
       >
            {/* Metemos el formulario como propiedad para el modallayout*/}
         <TagForm onSubmit={handleSaveTag} />

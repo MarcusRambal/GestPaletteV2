@@ -1,5 +1,5 @@
 import React from 'react';
-import './modalLayout.css';
+import styles from './modalLayout.module.css';
 
 interface ModalLayoutProps {
   isOpen: boolean;
@@ -12,13 +12,13 @@ const ModalLayout: React.FC<ModalLayoutProps> = ({ isOpen, onClose, title, child
   if (!isOpen) return null;
 
   return (
-    <div className="modal-overlay">
-      <div className="modal-content" >
-        <div className="modal-header">
-        <button onClick={onClose}>&times;</button>
-          <h3>{title}</h3> 
+    <div className={styles.modalOverlay}>
+      <div className={styles.modalContent}>
+        <div className={styles.modalHeader}>
+          <button onClick={onClose}>&times;</button>
+          <h3>{title}</h3>
         </div>
-        <div className="modal-body">
+        <div className={styles.modalBody}>
           {children}
         </div>
       </div>

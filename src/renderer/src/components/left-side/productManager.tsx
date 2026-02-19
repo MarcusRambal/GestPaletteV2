@@ -1,16 +1,12 @@
 import React, { useState } from 'react';
-import { ModalLayout } from '../ModalLayout'; // Ajusta la ruta según tu estructura
-import { ProductForm } from './productForm';   // El formulario que crearemos
-import './productManager.css';
+import  ModalLayout  from '../layouts/modalLayout';
+import { ProductForm } from './productForm';   
+import { Tag } from '../../types/tagType';
+import './productManager.css'
 
-interface Tag {
-  id: string;
-  nombre: string;
-  color: string;
-}
 
 interface ProductManagerProps {
-  tags: Tag[]; // Necesitamos los tags para el select del formulario
+  tags: Tag[]; 
   onProductCreated: (newProduct: any) => void;
 }
 
@@ -18,10 +14,9 @@ export const ProductManager: React.FC<ProductManagerProps> = ({ tags, onProductC
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleSaveProduct = (productData: any) => {
-    // Aquí podrías generar un ID único o tratar los datos antes de enviarlos
     const newProduct = {
       ...productData,
-      id: Date.now().toString(), // ID temporal
+      id: Date.now().toString(),
     };
     
     onProductCreated(newProduct);
@@ -31,15 +26,15 @@ export const ProductManager: React.FC<ProductManagerProps> = ({ tags, onProductC
   return (
     <div className="product-manager-header">
       {/* Botón que dispara el modal */}
-      <button className="open-modal-btn" onClick={setIsModalOpen(true)}>
-        Nuevo Producto
+      <button className="open-modal-btn" onClick={() => setIsModalOpen(true)}>
+        + Nuevo Producto
       </button>
 
       {/* Modal que renderiza el formulario de productos */}
       <ModalLayout 
         isOpen={isModalOpen} 
         onClose={() => setIsModalOpen(false) }
-        title="Crear Nuevo Producto"
+        title="Crear nuevo Producto"
       >
         <ProductForm 
           tags={tags} 
@@ -49,3 +44,4 @@ export const ProductManager: React.FC<ProductManagerProps> = ({ tags, onProductC
     </div>
   );
 };
+

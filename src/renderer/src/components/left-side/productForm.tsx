@@ -1,11 +1,13 @@
-import { useState } from 'React'
+import { useState } from 'react'
+import { ProductFormData } from '../../types/productProps';
 import './productForm.css'
+
 
 export const ProductForm = ({ tags, onSubmit }) => {
   const [formData, setFormData] = useState<ProductFormData>({
     name: '',
     type: '',
-    price: '',
+    price: 0,
     color: '#ffffff' 
   });
 
@@ -23,20 +25,20 @@ export const ProductForm = ({ tags, onSubmit }) => {
 
   return (
     <form className="product-form" onSubmit={(e) => { e.preventDefault(); onSubmit(formData); }}>
-      <div className="form-group">
-        <label>Nombre del Producto</label>
-        <input 
+        <div className='product-form-name-container'>
+          <p>Nombre del producto</p>
+          <input className='product-form-name-input'
           type="text" 
           value={formData.name}
           onChange={(e) => setFormData({...formData, name: e.target.value})}
-          placeholder="Ej. Fresas con Crema"
+          placeholder="Nombre del producto"
           required 
         />
-      </div>
-
-      <div className="form-group">
-        <label>Categoría (Tag)</label>
-        <select value={formData.type} onChange={handleTagChange} required>
+        </div>
+        
+        <div className='product-form-tag-container'>
+          <p>Etiqueta del producto</p>
+          <select className='product-form-tag-select' value={formData.type} onChange={handleTagChange} required>
           <option value="" disabled hidden>Selecciona un tag...</option>
           {tags.map(tag => (
             <option key={tag.id} value={tag.nombre}>
@@ -44,31 +46,21 @@ export const ProductForm = ({ tags, onSubmit }) => {
             </option>
           ))}
         </select>
-      </div>
+        </div>
+        
 
-      <div className="form-group">
-        <label>Precio</label>
-        <input 
+        <div className='product-form-price-container'>
+          <p>Precio del producto</p>
+          <input 
+        className='product-form-price-input'
           type="number" 
           value={formData.price}
-          onChange={(e) => setFormData({...formData, price: e.target.value})}
-          placeholder="6000"
+          onChange={(e) => setFormData({...formData, price: e.target.value === '' ? 0 : Number(e.target.value)})}
           required 
         />
-      </div>
-
-    
-      <div className="color-preview" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-        <span>Color de etiqueta:</span>
-        <div style={{ 
-          width: '20px', 
-          height: '20px', 
-          borderRadius: '50%', 
-          backgroundColor: formData.color,
-          border: '1px solid #ccc' 
-        }} />
-      </div>
-
+        </div>
+        
+      
       <button type="submit" className="btn-save">Crear Producto</button>
     </form>
   );

@@ -1,7 +1,12 @@
 import './selectedProduct.css'
 import {ProductProps} from '../../types/productProps'  
 
-export const SelectedProduct: React.FC<ProductProps & { quantity: number }> = ({ name, type, price, color, quantity }) => {
+interface SelectedProductProps extends ProductProps {
+    quantity: number;
+    onRemove: () => void;
+}
+
+export const SelectedProduct: React.FC<SelectedProductProps> = ({name, type, price, color, quantity, onRemove }) => {
     const totalPorProducto = price * quantity;
 
     return (
@@ -22,7 +27,7 @@ export const SelectedProduct: React.FC<ProductProps & { quantity: number }> = ({
             <div className="selected-total">
                 ${totalPorProducto}
             </div>
-            <button className="remove-button-red">Eliminar</button>
+            <button className="remove-button-red" onClick={onRemove}>Eliminar</button>
         </div>
     );
 };

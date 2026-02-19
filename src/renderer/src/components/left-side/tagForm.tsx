@@ -1,20 +1,22 @@
 import { useState } from 'react';
 import './tagForm.css'
+import { Tag } from '../../types/tagType';
 
-interface Tag {
-  name: string;
-  color: string;
-}
 
 const TagForm = ({ onSubmit }: { onSubmit: (tag: Tag) => void }) => {
-  const [tag, setTag] = useState<Tag>({ name: '', color: '#000000' });
+  const [tag, setTag] = useState<Tag>({ id: '', name: '', color: '#000000' });
 
   return (
     <form className="tag-form" onSubmit={(e) => { e.preventDefault(); onSubmit(tag); }}>
-      <input className="tag-input"
+      
+      <div className='tag-form-inpur-container'>
+        <p>Nombre de la etiqueta</p>
+        <input className="tag-input"
         placeholder="Nombre de la etiqueta" 
         onChange={e => setTag({...tag, name: e.target.value})} 
       />
+      </div>
+      
       <div className = "color-selector-container">
         <p>Presiona para elegir color</p>
       <input  className='color-selector'

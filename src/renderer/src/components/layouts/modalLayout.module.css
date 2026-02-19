@@ -1,4 +1,4 @@
-.modal-overlay {
+.modalOverlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -10,14 +10,17 @@
     align-items: center;
 }
 
-.modal-content {
+.modalContent {
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
     width: 400px;
     max-width: 90%;
+
 }
 
-.modal-header h3 {
+.modalHeader h3 {
     margin-top: 20px;
+    margin-bottom: 20px;
 }
+
