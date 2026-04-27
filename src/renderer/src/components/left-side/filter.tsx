@@ -1,19 +1,18 @@
  import './filter.css';
 
- export const Filter = () => {
+ export const Filter = ({ onFilterChange }: { onFilterChange: (filter: string) => void }) => {
 
+    const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+      onFilterChange(e.target.value);
+    }
 
     return (
         <div className="filter-container">
-           <select name="filters" id="filters">
-                <option value="opcion0">Filtrar por</option>
-                <option value="opcion1">Hatsune Miku</option>
-                <option value="opcion2">Kagamine Rin</option>
-                <option value="opcion3">Kagamine Len</option>
-                <option value="opcion4">Megurine Luka</option>
-                <option value="opcion5">KAITO</option>
-                <option value="opcion6">MEIKO</option>
-                <option value="opcion7">Kasane Teto</option>
+           <select name="filters" id="filters" onChange={handleChange}>
+                <option value="">Filtro</option>
+                <option value="Rellenas">Rellenas</option>
+                <option value="Especial">Especial</option>
+                <option value="Clásica">Clásica</option>
            </select>
         </div>
     )

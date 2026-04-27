@@ -3,6 +3,7 @@ import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 import { createTables } from './tables'
+import { getProducts } from './db/productRepository';
 
 function createWindow(): void {
   // Create the browser window.
@@ -38,6 +39,9 @@ function createWindow(): void {
   }
 }
 
+function initIpcHandlers() {
+    ipcMain.handle('db:get-products', getProducts);
+}
 
 app.whenReady().then(() => {
   // Set app user model id for windows
@@ -51,7 +55,7 @@ app.whenReady().then(() => {
 
   // Create or initialize database tables
   createTables()
-
+  initIpcHandlers();
   createWindow()
 
 })

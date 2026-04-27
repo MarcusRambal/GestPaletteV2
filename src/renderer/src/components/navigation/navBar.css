@@ -1,0 +1,28 @@
+.segmented-control-container {
+  display: flex;
+  background-color: #AD9ACA;
+  height: 100%;
+}
+
+.segmented-control{
+  display: flex;
+  height: 100%;
+}
+
+.currentTab {
+  flex: 1;
+  width: 120px;
+  border: none;   
+  background: transparent;
+  cursor: pointer;
+  font-size: 20px;
+  color: white;  
+}
+
+.currentTab.active {
+  background-color: #746A7D; 
+}
+
+.currentTab:hover:not(.active) {
+  background-color: #6c5382;
+}

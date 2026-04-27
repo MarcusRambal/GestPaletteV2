@@ -1,13 +1,13 @@
 import { ElectronAPI } from '@electron-toolkit/preload'
 
-interface CustomAPI {
-  saludar: () => string
-  sumar: (a: number, b: number) => number
+interface HomeFunctions {
+  getProducts: () => Promise<any[]>
+  createProduct: (product: any) => Promise<any>
 }
 
 declare global {
   interface Window {
     electron: ElectronAPI
-    api: CustomAPI
+    api: homeFunctions
   }
 }

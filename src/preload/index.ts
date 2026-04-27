@@ -1,25 +1,16 @@
-import { contextBridge } from 'electron'
-import { electronAPI } from '@electron-toolkit/preload'
+  import { contextBridge, ipcRenderer } from 'electron'
 
-// Custom APIs for renderer
-const api = {
-  saludar: () => 'Hola desde el preload',
-  sumar: (a: number, b: number) => a + b
-}
-
-// Use `contextBridge` APIs to expose Electron APIs to
-// renderer only if context isolation is enabled, otherwise
-// just add to the DOM global.
-if (process.contextIsolated) {
-  try {
-    contextBridge.exposeInMainWorld('electron', electronAPI)
-    contextBridge.exposeInMainWorld('api', api)
-  } catch (error) {
-    console.error(error)
+  const api = {
+    getProducts: () => ipcRenderer.invoke('db:get-products'),
+    createProduct: (product: any) => ipcRenderer.invoke('db:create-product', product)
   }
-} else {
-  // @ts-ignore (define in dts)
-  window.electron = electronAPI
-  // @ts-ignore (define in dts)
-  window.api = api
-}
+
+  if (process.contextIsolated) {
+    try {
+      contextBridge.exposeInMainWorld('api', api)
+    } catch (error) {
+      console.error(error)
+    }
+  } else {
+    window.api = api
+  }

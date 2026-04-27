@@ -28,13 +28,14 @@
 .color-selector-container {
   margin-top: 20px; 
   display: flex;
-  flex-direction: row;
-  align-items: left;
-  gap: 30px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 15px;
 }
 
 .color-selector-container p {
-  margin-top: 10px;
+  margin-top: 0;
+  margin-bottom: 5px;
 }
 
 .color-selector {
@@ -42,4 +43,30 @@
   height: 40px;
   border: none;
   border-radius: 4px;
+}
+
+.suggested-colors {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+  margin-top: 15px;
+  width: 100%;
+}
+
+.color-button {
+  width: 35px;
+  height: 35px;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.color-button:hover {
+  transform: scale(1.1);
+}
+
+.color-button.active {
+  border-color: #333;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.2);
 }
