@@ -1,8 +1,4 @@
-const Database = require('better-sqlite3')
-const path = require('path')
-
-const dbPath = path.resolve(__dirname, 'Invoices.db')
-export const db = new Database(dbPath)
+import { db } from './db/database'
 
 export function createTables() {
   try {
@@ -13,7 +9,8 @@ export function createTables() {
     db.exec(`
       CREATE TABLE IF NOT EXISTS Label (
         label_id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT NOT NULL
+        name TEXT NOT NULL,
+        color TEXT NOT NULL
       );
 
       CREATE TABLE IF NOT EXISTS Products (

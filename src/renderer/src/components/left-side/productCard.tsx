@@ -1,5 +1,5 @@
 import './productCard.css';
-import {ProductProps} from '../../types/productProps'
+import {ProductProps} from '../../../../types/productProps'
 
 interface ProductCardProps extends ProductProps {
   onAdd: () => void;

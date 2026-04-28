@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './tagForm.css'
-import { Tag } from '../../types/tagType';
+import { Tag } from '../../../../types/tagType'
 
 
 const TagForm = ({ onSubmit }: { onSubmit: (tag: Tag) => void }) => {

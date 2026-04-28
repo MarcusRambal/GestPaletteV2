@@ -3,14 +3,18 @@ import ModalLayout   from '../layouts/modalLayout';
 import TagForm  from './tagForm';
 import './tagManager.css';
 
-const TagManager = () => {
+interface TagManagerProps { 
+  onTagCreated: (newTag: any) => void;
+}
+
+const TagManager = ({ onTagCreated }: TagManagerProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // 2. La función que procesa los datos finales
   const handleSaveTag = (data: { name: string; color: string }) => {
     console.log("Nueva etiqueta creada:", data);
     // Aquí harías tu llamada a la API
-    setIsModalOpen(false); // Cerramos el modal tras guardar
+    onTagCreated(data);
+    setIsModalOpen(false); 
   };
 
   return (

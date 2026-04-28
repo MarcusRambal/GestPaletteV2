@@ -1,25 +1,27 @@
 import { useState } from 'react'
-import { ProductFormData } from '../../types/productProps';
+import { ProductFormData } from '../../../../types/productProps'
 import './productForm.css'
+import { Tag } from '../../../../types/tagType'
+
+interface ProductFormProps {
+  tags: Tag[];
+  onSubmit: (productData: ProductFormData) => void;
+}
 
 
-export const ProductForm = ({ tags, onSubmit }) => {
+export const ProductForm = ({ tags, onSubmit }: ProductFormProps) => {
   const [formData, setFormData] = useState<ProductFormData>({
     name: '',
     type: '',
     price: 0,
-    color: '#ffffff' 
   });
 
   const handleTagChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedTagName = e.target.value;
  
-    const selectedTag = tags.find(t => t.nombre === selectedTagName);
-
     setFormData({
       ...formData,
       type: selectedTagName,
-      color: selectedTag ? selectedTag.color : '#ffffff'
     });
   };
 
@@ -40,11 +42,11 @@ export const ProductForm = ({ tags, onSubmit }) => {
           <p>Etiqueta del producto</p>
           <select className='product-form-tag-select' value={formData.type} onChange={handleTagChange} required>
           <option value="" disabled hidden>Selecciona un tag...</option>
-          {tags.map(tag => (
-            <option key={tag.id} value={tag.nombre}>
-              {tag.nombre}
-            </option>
-          ))}
+              {tags.map((tag) => (
+                     <option key={tag.id} value={tag.name}>
+                        {tag.name}
+                     </option>
+                  ))}
         </select>
         </div>
         

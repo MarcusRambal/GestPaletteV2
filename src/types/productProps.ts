@@ -11,6 +11,4 @@ export interface ProductFormData {
   name: string;
   type: string;  
   price: number;
-  color: string; 
 }
-

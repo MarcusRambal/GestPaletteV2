@@ -1,8 +1,9 @@
- import  { useState } from 'react';
+ import  { useState, useEffect } from 'react';
  import './home.css'
 
  //Types
-import { ProductProps } from '../../types/productProps';
+import { ProductProps } from '../../../../types/productProps';
+import { Tag } from '../../../../types/tagType'
 
  //left side imports 
  import { SearchBar } from '../../components/left-side/searchBar'
@@ -24,7 +25,35 @@ export function Home () {
 const [selectedProducts, setSelectedProducts] = useState<ProductProps[]>([]);
 const [searchQuery, setSearchQuery] = useState('');
 const [selectedFilter, setSelectedFilter] = useState('');
-const productos = [
+const [productos, setProductos] = useState<ProductProps[]>([]);
+const [tags, setTags] = useState<Tag[]>([]);
+
+//Function to load tags
+const loadTags = async () => {
+  try {
+    const loadedTags = await window.homeApi.getTags();
+    setTags(loadedTags.map(tag => ({
+          id: tag.label_id,
+          name: tag.name,
+          color: tag.color
+        })));
+  } catch (error) {
+    console.error('Error loading tags:', error);
+    setTags([]);
+  }
+}
+
+useEffect(() => {
+  // Obtener productos desde homeApi
+  window.homeApi?.getProducts()
+    .then(setProductos)
+    .catch(error => console.error('Error loading products:', error));
+
+  loadTags();
+}, []);
+
+// Datos por defecto si no se cargan desde la BD
+const productosDefault = [
   // Cálidos (Pastel)
   { id: 1, name: "Fresa Pastel", type: "Rellenas", price: 6000, color: "#FFADAD" },
   { id: 2, name: "Durazno Suave", type: "Especial", price: 7500, color: "#FFD6A5" },
@@ -48,6 +77,30 @@ const productos = [
   { id: 24, name: "Amarillo Neón Suave", type: "Clásica", price: 6200, color: "#CCFF33" }
 ];
 
+//Functions for homeApi
+
+const handleCreateTag = async (tag: any) => {
+    try{
+      console.log('Creando etiqueta:', tag);
+      await window.homeApi.createTag(tag);
+      await loadTags();
+    }catch(error) {
+      console.error('Error al crear etiqueta:', error);
+    }
+}
+
+const handleCreateProduct = async (product: any) => {
+  try {
+    const newProduct = await window.homeApi.createProduct(product);
+    console.log('llamando creacion de producto:', newProduct);
+    // Aquí podrías actualizar tu lista de productos si es necesario
+  } catch (error) {
+    console.error('Error al crear producto:', error);
+  }
+}
+
+
+//Functions for selected products management
 const handleAddProduct = (product: any) => {
     setSelectedProducts(prevList => {
       const exists = prevList.find(item => item.id === product.id);
@@ -70,7 +123,7 @@ const handleAddProduct = (product: any) => {
     });
   };
 
-  const filteredProducts = productos.filter(prod => {
+  const filteredProducts = (productos.length > 0 ? productos : productosDefault).filter(prod => {
     const matchesSearch = prod.name.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesFilter = selectedFilter === '' || prod.type === selectedFilter;
     return matchesSearch && matchesFilter;
@@ -84,8 +137,8 @@ const handleAddProduct = (product: any) => {
           <SearchBar
           onSearch={setSearchQuery}
           />
-          <Filter onFilterChange={setSelectedFilter} />
-          <TagManager />
+          <Filter onFilterChange={setSelectedFilter} tags={tags} />
+          <TagManager onTagCreated={(newTag) => { handleCreateTag(newTag) }} />
         </div>      {/* search-container */}
         
         <div className='products-container'>
@@ -94,12 +147,8 @@ const handleAddProduct = (product: any) => {
             {/* tags para ProductManager y handler para recibir el producto creado */}
             {/** Si prefieres traer `tags` desde un store o API, reemplaza esta constante */}
             <ProductManager
-              tags={[
-                { id: '1', name: 'Rellenas', color: '#e5b3e1' },
-                { id: '2', name: 'Especial', color: '#b3e5d1' },
-                { id: '3', name: 'Clásica', color: '#fdfd96' }
-              ]}
-              onProductCreated={(newProduct) => { console.log('Producto creado:', newProduct); }}
+              tags={tags}
+              onProductCreated={(newProduct) => { handleCreateProduct(newProduct) }}
             />
           </div>
           <div className = 'product-list'>

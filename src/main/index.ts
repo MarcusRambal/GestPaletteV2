@@ -3,7 +3,12 @@ import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 import { createTables } from './tables'
-import { getProducts } from './db/productRepository';
+import { getProducts, createProduct, createTag, getTags } from './db/productRepository';
+import { Tag } from '../types/tagType'
+import { db } from './db/database'
+
+
+console.log("RUTA DE LA BASE DE DATOS:", db.pragma('database_list'));
 
 function createWindow(): void {
   // Create the browser window.
@@ -41,6 +46,13 @@ function createWindow(): void {
 
 function initIpcHandlers() {
     ipcMain.handle('db:get-products', getProducts);
+    ipcMain.handle('db:create-product', createProduct);
+    ipcMain.handle('db:create-tag', (_, tag: Tag) => {
+        return createTag(tag);
+    });
+    ipcMain.handle('db:get-tags', () => {
+       return getTags();
+    });
 }
 
 app.whenReady().then(() => {

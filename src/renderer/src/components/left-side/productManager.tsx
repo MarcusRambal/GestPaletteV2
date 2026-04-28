@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import  ModalLayout  from '../layouts/modalLayout';
 import { ProductForm } from './productForm';   
-import { Tag } from '../../types/tagType';
+import { Tag } from '../../../../types/tagType'
 import './productManager.css'
 
 
